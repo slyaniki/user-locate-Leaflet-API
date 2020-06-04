@@ -19,6 +19,9 @@
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             $array["success"] = FALSE;
             $array["message"]="Email Incorrect";
+        }else if(getClient($db,$email)){
+            $array["success"] = FALSE;
+            $array["message"]="Email existe deja";
         }
 
         if($array["success"] === TRUE && !insertInfo($db,[$nom,$email,$password,$latitude,$longitude])){

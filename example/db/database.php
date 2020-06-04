@@ -20,8 +20,14 @@
 
     function insertInfo($db,$datas){
         $prep = $db->prepare("INSERT INTO clients(nom,email,password,latitude,longitude,created_date) VALUES(?,?,?,?,?,NOW())");
-        $prep->execute($datas); 
-        return $prep    ;
+        
+        return $prep->execute($datas)?TRUE:FALSE;
+    }
+
+    function getClient($db,$email){
+        $prep = $db->prepare("SELECT id FROM clients WHERE email = ?");
+        $prep->execute([$email]);
+        return $prep->fetch()?TRUE:FALSE;
     }
 
 ?>
