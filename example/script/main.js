@@ -1,4 +1,5 @@
 let form = $("#form");
+let btn = $(".btn-success");
 let infos = {};
 
 window.onload = () => {
@@ -7,6 +8,8 @@ window.onload = () => {
 
 form.submit((e) => {
   e.preventDefault();
+  btn.html("Chargement...");
+  btn[0].style.opacity = "0.4";
   let datas = form[0].getElementsByTagName("input");
   infos.nom = datas["nom"].value;
   infos.email = datas["email"].value;
@@ -23,6 +26,8 @@ function EnvoiForm(datas) {
     success: function (data) {
       let result = JSON.parse(data);
       console.log(result);
+      btn.html("INSCRIPTION");
+      btn[0].style.opacity = "1";
       if (result.success) {
         form[0].style.display = "none";
         $(".alert-success").html(result.message);

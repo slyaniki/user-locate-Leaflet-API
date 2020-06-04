@@ -1,10 +1,10 @@
 <?php 
 
     class Database{
-        private static $host="localhost";
-        private static $user="root";
+        private static $host="db4free.net";
+        private static $user="rolls98";
         private static $db = "geolocate";
-        private static $password = "02491383Ro";
+        private static $password = "testgeolocate";
         private static $connexion = null;
 
         public static function connexion(){

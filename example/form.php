@@ -19,6 +19,7 @@
 
         .btn-success {
             margin-top: 20px;
+            transition:0.5s;
         }
 
         h2 {
