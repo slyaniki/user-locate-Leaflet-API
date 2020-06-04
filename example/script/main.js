@@ -22,11 +22,13 @@ function EnvoiForm(datas) {
     url: url,
     success: function (data) {
       let result = JSON.parse(data);
+      console.log(result);
       if (result.success) {
         form[0].style.display = "none";
-        $(".alert-success").html("Message envoyé avec success");
+        $(".alert-success").html(result.message);
+        $(".alert-danger").html("");
       } else {
-        $(".alert-danger").html(result.errors);
+        $(".alert-danger").html(result.message);
       }
     },
     error: function (err) {
