@@ -44,7 +44,7 @@ function EnvoiForm(datas) {
 
 function getLocation() {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(getPosition);
+    navigator.geolocation.getCurrentPosition(getPosition, errorPosition);
   } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -53,4 +53,15 @@ function getLocation() {
 function getPosition(position) {
   infos.lat = position.coords.latitude;
   infos.long = position.coords.longitude;
+}
+
+function errorPosition(err) {
+  if (err.message === "User denied Geolocation") {
+    btn[0].disabled = true;
+    btn[0].title =
+      "Veuillez Activer la location avant de faire une inscription";
+    $(".alert-danger").html(
+      `Veuillez Activer la location avant de faire une inscription <a href="form.php"> clique-ici</a>`
+    );
+  }
 }

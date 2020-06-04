@@ -22,6 +22,11 @@
             transition:0.5s;
         }
 
+        .alert-danger{
+            padding:15px;
+            font-size:18px;
+        }
+
         h2 {
             text-align: center;
             margin-bottom: 10px;

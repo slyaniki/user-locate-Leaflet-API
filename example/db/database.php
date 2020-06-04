@@ -30,4 +30,9 @@
         return $prep->fetch()?TRUE:FALSE;
     }
 
+    function getUsers($db){
+        $q = $db->query("SELECT nom,latitude,longitude FROM clients");
+        return $q->fetchAll();
+    }
+
 ?>

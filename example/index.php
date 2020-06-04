@@ -110,5 +110,34 @@
 
             }
         });
+
+        $.ajax({
+            type: "get",
+            url: "getUsers.php",
+            success: (result) => {
+                showUsers(JSON.parse(result));
+            },
+            error: (err) => {
+                console.log(err);
+            }
+        });
+
+        function showUsers(users){
+            for (let i = 0; i < users.length; i++) {
+                users[i].coords = [parseFloat(users[i].latitude),parseFloat(users[i].longitude)];
+                
+                manualMarker = L.userMarker(users[i].coords, {
+                    smallIcon: false
+                }, );
+                manualMarker.addTo(map);
+            }
+
+            let divs = $(".leaflet-marker-icon");
+            console.log(divs);
+            for (let i = 0; i < divs.length; i++) {
+                divs[i].title = users[i].nom;
+            }
+        }
+
     </script>
 </body>
