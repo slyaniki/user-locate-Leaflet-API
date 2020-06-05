@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+    <link rel="stylesheet" href="../src/leaflet.css" />
     <link rel="stylesheet" href="../src/leaflet.usermarker.css" />
 
 </head>
@@ -26,8 +26,8 @@
     </div>
 
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="script/leaflet.js"></script>
     <script src="../src/leaflet.usermarker.js"></script>
     <script>
         // initialisation de la map

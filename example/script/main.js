@@ -1,9 +1,16 @@
 let form = $("#form");
 let btn = $(".btn-success");
 let infos = {};
+let user = getCookie("mail");
 
 window.onload = () => {
-  getLocation();
+
+  if (user != "") {
+    watchPosition();
+  } else {
+    getLocation();
+  }
+
 };
 
 form.submit((e) => {
@@ -32,6 +39,7 @@ function EnvoiForm(datas) {
         form[0].style.display = "none";
         $(".alert-success").html(result.message);
         $(".alert-danger").html("");
+        setCookie("mail", infos.email, 365);
       } else {
         $(".alert-danger").html(result.message);
       }
@@ -46,13 +54,41 @@ function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(getPosition, errorPosition);
   } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function watchPosition() {
+  if (navigator.geolocation) {
+    navigator.geolocation.watchPosition(updatePosition, errorPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
   }
 }
 
 function getPosition(position) {
   infos.lat = position.coords.latitude;
   infos.long = position.coords.longitude;
+}
+
+function updatePosition(position) {
+  let datas = {
+    mail: user,
+    lat: position.coords.latitude,
+    long: position.coords.longitude
+  };
+  let url = "update.php";
+  $.ajax({
+    type: "POST",
+    data: datas,
+    url: url,
+    success: function (data) {
+      console.log(JSON.parse(data));
+    },
+    error: function (err) {
+      console.log(err);
+    },
+  });
 }
 
 function errorPosition(err) {
@@ -64,4 +100,27 @@ function errorPosition(err) {
       `Veuillez Activer la location avant de faire une inscription <a href="form.php"> clique-ici</a>`
     );
   }
+}
+
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
 }

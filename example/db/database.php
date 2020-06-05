@@ -35,4 +35,9 @@
         return $q->fetchAll();
     }
 
+    function update($db,$data){
+        $q = $db->prepare("UPDATE clients SET latitude=?,longitude=? WHERE email = ?");
+        return $q->execute($data)?true:false;
+    }
+
 ?>

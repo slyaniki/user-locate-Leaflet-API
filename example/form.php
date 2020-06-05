@@ -9,7 +9,7 @@
 
     <style>
         #main {
-            width: 600px;
+            width: 90%;
             min-height: 400px;
             margin: 40px auto;
             padding: 20px;
