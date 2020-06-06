@@ -111,18 +111,29 @@
             }
         });
 
-        $.ajax({
+       window.onload = ()=>{
+           liveServer();
+       }
+
+        function liveServer(){
+            $.ajax({
             type: "get",
             url: "getUsers.php",
             success: (result) => {
+                console.log(JSON.parse(result));
                 showUsers(JSON.parse(result));
+               liveServer();
             },
             error: (err) => {
                 console.log(err);
             }
         });
+        }
+
+        let p_div = $(".leaflet-marker-pane");    
 
         function showUsers(users){
+            renitialiseDivs($(".leaflet-marker-icon"));
             for (let i = 0; i < users.length; i++) {
                 users[i].coords = [parseFloat(users[i].latitude),parseFloat(users[i].longitude)];
                 
@@ -133,9 +144,18 @@
             }
 
             let divs = $(".leaflet-marker-icon");
-            console.log(divs);
+            console.log("user : ",users[0].nom);
+            console.log("User length : ",users.length);
+            console.log("User length : ",divs.length);
+
             for (let i = 0; i < divs.length; i++) {
                 divs[i].title = users[i].nom;
+            }
+        }
+
+        function renitialiseDivs(div){
+            for (let i = 0; i < div.length; i++) {
+                div.remove();
             }
         }
 

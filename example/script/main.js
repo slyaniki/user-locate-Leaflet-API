@@ -4,13 +4,10 @@ let infos = {};
 let user = getCookie("mail");
 
 window.onload = () => {
-
   if (user != "") {
     watchPosition();
-  } else {
-    getLocation();
   }
-
+  getLocation();
 };
 
 form.submit((e) => {
@@ -32,7 +29,6 @@ function EnvoiForm(datas) {
     url: url,
     success: function (data) {
       let result = JSON.parse(data);
-      console.log(result);
       btn.html("INSCRIPTION");
       btn[0].style.opacity = "1";
       if (result.success) {
