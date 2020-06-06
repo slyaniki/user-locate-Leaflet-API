@@ -120,7 +120,6 @@
             type: "get",
             url: "getUsers.php",
             success: (result) => {
-                console.log(JSON.parse(result));
                 showUsers(JSON.parse(result));
                liveServer();
             },
@@ -130,7 +129,7 @@
         });
         }
 
-        let p_div = $(".leaflet-marker-pane");    
+            
 
         function showUsers(users){
             renitialiseDivs($(".leaflet-marker-icon"));
@@ -144,9 +143,7 @@
             }
 
             let divs = $(".leaflet-marker-icon");
-            console.log("user : ",users[0].nom);
-            console.log("User length : ",users.length);
-            console.log("User length : ",divs.length);
+           
 
             for (let i = 0; i < divs.length; i++) {
                 divs[i].title = users[i].nom;
