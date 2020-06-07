@@ -1,6 +1,6 @@
 <?php 
     include "db/database.php";
-    $db = Database::connexion();
+    $db = new Database();
     $array = ["success"=>TRUE,"message"=>"Message envoyé avec success"];
     
     if(!empty($_POST)){
@@ -19,12 +19,12 @@
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             $array["success"] = FALSE;
             $array["message"]="Email Incorrect";
-        }else if(getClient($db,$email)){
+        }else if($db->getClient($email)){
             $array["success"] = FALSE;
             $array["message"]="Email existe deja";
         }
 
-        if($array["success"] === TRUE && !insertInfo($db,[$nom,$email,$password,$latitude,$longitude])){
+        if($array["success"] === TRUE && $db->insertInfo([$nom,$email,$password,$latitude,$longitude])){
             $array["success"] = false;
             $array["message"] = "Erreur au niveau de la bd";
         }

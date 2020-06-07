@@ -1,11 +1,11 @@
 <?php 
 
     include "db/database.php";
-    $db = Database::connexion();
+    $db = new Database();
 
     if($_POST["mail"]){
         
-        if(getClient($db,$_POST["mail"]) && update($db,[$_POST["lat"],$_POST["long"],$_POST["mail"]])){
+        if($db->getClient($_POST["mail"]) && $db->update([$_POST["lat"],$_POST["long"],$_POST["mail"]])){
             echo json_encode("Base de donnée mise a jour");
         }else{
             echo json_encode("Erreur au niveau de la bd");
